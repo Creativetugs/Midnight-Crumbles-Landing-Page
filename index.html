@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Crumbles | Homemade Cookies</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#09060D',
+                        'midnight-card': '#140c21',
+                        'midnight-light': '#1e1333',
+                        purpleAccent: '#A600E8',
+                        purpleGlow: '#c233ff',
+                        goldAccent: '#FFD15C',
+                        goldHover: '#ffe294',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px -5px rgba(255, 209, 92, 0.4)',
+                        'purple-glow': '0 0 25px -5px rgba(166, 0, 232, 0.5)',
+                        'gold-sm': '0 0 10px rgba(255, 209, 92, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glowing & Particle Animations */
+        body {
+            background-color: #09060D;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .gold-border-gradient {
+            border: 2px solid transparent;
+            background-image: linear-gradient(#140c21, #140c21), linear-gradient(135deg, #FFD15C, #A600E8, #FFD15C);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0B8 0%, #FFD15C 50%, #D49B18 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .purple-gradient-text {
+            background: linear-gradient(135deg, #E280FF 0%, #A600E8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(166, 0, 232, 0.25) 0%, rgba(9, 6, 13, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 209, 92, 0.15) 0%, rgba(9, 6, 13, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Sparkle float keyframe */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Drip effect styling */
+        .chocolate-drip {
+            background: radial-gradient(circle, rgba(26,14,3,1) 0%, rgba(9,6,13,1) 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09060D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a1945;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A600E8;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-purpleAccent selection:text-white">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-midnight/80 border-b border-purpleAccent/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative flex items-center justify-center w-12 h-12 rounded-full bg-midnight-light border border-goldAccent/50 group-hover:shadow-gold-sm transition-all">
+                    <i class="fa-solid font-bold fa-moon text-goldAccent text-xl group-hover:rotate-12 transition-transform"></i>
+                    <i class="fa-solid fa-cookie text-purpleAccent text-xs absolute -bottom-0.5 -right-0.5"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider gold-gradient-text block leading-none">
+                        MIDNIGHT
+                    </span>
+                    <span class="font-script text-xl text-purpleAccent block -mt-1">
+                        Crumbles
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#menu" class="hover:text-goldAccent transition-colors">Cookie Menu</a>
+                <a href="#about" class="hover:text-goldAccent transition-colors">Our Story</a>
+                <a href="#ordering" class="hover:text-goldAccent transition-colors">How to Order</a>
+                <a href="#contact" class="hover:text-goldAccent transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-midnight-light border border-purpleAccent/30 hover:border-goldAccent text-goldAccent transition-all">
+                    <i class="fa-solid fa-cookie-bite text-lg"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-purpleAccent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border border-midnight">0</span>
+                </button>
+                
+                <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purpleAccent to-purple-800 hover:from-purple-600 hover:to-purpleAccent text-white text-sm font-semibold shadow-purple-glow transition-all duration-300">
+                    <span>Order Now</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center pt-10 pb-20 overflow-hidden">
+        <div class="ambient-glow-1 top-10 -left-20"></div>
+        <div class="ambient-glow-2 bottom-10 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purpleAccent/10 border border-purpleAccent/30 text-purpleAccent text-xs sm:text-sm font-semibold tracking-wide uppercase">
+                        <i class="fa-solid fa-sparkles text-goldAccent"></i> Freshly Baked Late-Night Treats
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                        <span class="block text-white font-serif">MIDNIGHT</span>
+                        <span class="font-script text-5xl sm:text-7xl lg:text-8xl purple-gradient-text block -mt-2 sm:-mt-4">
+                            Crumbles
+                        </span>
+                    </h1>
+
+                    <!-- Tagline Banner -->
+                    <div class="py-2 px-6 rounded-2xl bg-midnight-card/80 border border-goldAccent/30 inline-block shadow-gold-sm">
+                        <p class="font-serif italic text-goldAccent text-lg sm:text-2xl font-semibold">
+                            “Craving don't have a curfew!”
+                        </p>
+                    </div>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Sweet treats, late nights, real flavor. Handcrafted gourmet cookies baked fresh for your late-night indulgence. Warm, gooey, and delivered straight to your door.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-goldAccent via-amber-400 to-amber-500 hover:from-amber-300 hover:to-goldAccent text-midnight font-bold text-center shadow-gold-glow transform hover:-translate-y-0.5 transition-all">
+                            Explore Cookie Menu <i class="fa-solid fa-cookie text-midnight ml-2"></i>
+                        </a>
+                        <a href="tel:7692899557" class="w-full sm:w-auto px-8 py-4 rounded-full bg-midnight-light border border-purpleAccent/40 hover:border-purpleAccent text-white text-center font-semibold hover:bg-purpleAccent/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone text-purpleAccent"></i> Call 769-289-9557
+                        </a>
+                    </div>
+
+                    <!-- Micro Social Proof / Quick Info -->
+                    <div class="pt-6 border-t border-purpleAccent/20 grid grid-cols-3 gap-4 text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-goldAccent font-bold text-lg sm:text-xl">100%</div>
+                            <div class="text-xs text-gray-400">Homemade Quality</div>
+                        </div>
+                        <div>
+                            <div class="text-purpleAccent font-bold text-lg sm:text-xl">6 Signature</div>
+                            <div class="text-xs text-gray-400">Gourmet Flavors</div>
+                        </div>
+                        <div>
+                            <div class="text-goldAccent font-bold text-lg sm:text-xl">Late Night</div>
+                            <div class="text-xs text-gray-400">Curfew Free</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual / Featured Badge -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full gold-border-gradient p-3 shadow-purple-glow animate-float">
+                        <div class="w-full h-full rounded-full overflow-hidden relative bg-midnight-card flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80" alt="Freshly Baked Chocolate Chip Cookies" class="w-full h-full object-cover transform scale-110 hover:scale-125 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-80"></div>
+                            
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-5/6 text-center bg-midnight/90 backdrop-blur-md border border-goldAccent/40 py-2 px-4 rounded-xl shadow-lg">
+                                <span class="font-script text-2xl text-goldAccent block">Freshly Baked</span>
+                                <span class="text-xs tracking-wider text-purpleAccent uppercase font-bold">Warm & Gooey Every Time</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Decorative Moon Badge -->
+                    <div class="absolute -top-4 right-4 sm:right-10 bg-midnight-light border border-goldAccent/40 p-4 rounded-2xl shadow-gold-sm flex items-center gap-3">
+                        <i class="fa-solid fa-moon text-goldAccent text-2xl animate-pulse"></i>
+                        <div class="text-left">
+                            <div class="text-xs text-gray-400">Satisfy Your</div>
+                            <div class="text-sm font-bold text-white">Midnight Cravings</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookie Menu Section -->
+    <section id="menu" class="py-20 relative bg-midnight-card/50 border-t border-b border-purpleAccent/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-block px-4 py-1 rounded-full bg-goldAccent/10 border border-goldAccent/30 text-goldAccent text-xs font-bold uppercase tracking-widest">
+                    Signature Selection
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white">
+                    Homemade Cookies <span class="font-script text-purpleAccent text-4xl sm:text-6xl font-normal block sm:inline">Menu</span>
+                </h2>
+                <p class="text-gray-400 text-base sm:text-lg">
+                    “Sweet treats, late nights, real flavor.” Choose your favorite gourmet crumbles below.
+                </p>
+            </div>
+
+            <!-- Cookie Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Cookie Item 1 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1607920591413-4ec007e70023?auto=format&fit=crop&w=600&q=80" alt="Classic Chocolate Chip" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $3.50 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Classic Chocolate Chip</h3>
+                            <span class="text-xs bg-purpleAccent/20 text-purpleAccent px-2 py-0.5 rounded font-semibold">Best Seller</span>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“The timeless favorite.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Packed with rich, melt-in-your-mouth chocolate chips and baked to golden perfection with crisp edges and a gooey center.</p>
+                    </div>
+                    <button onclick="addToCart('Classic Chocolate Chip', 3.50)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Cookie Item 2 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80" alt="Oatmeal Raisin" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $3.50 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Oatmeal Raisin</h3>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“Chewy, hearty, and full of flavor.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Wholesome rolled oats blended with sweet plump raisins and warm spices for an irresistibly comforting bite.</p>
+                    </div>
+                    <button onclick="addToCart('Oatmeal Raisin', 3.50)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Cookie Item 3 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=600&q=80" alt="Snickerdoodle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $3.50 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Snickerdoodle</h3>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“Cinnamon, sugar, perfection.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Soft, buttery cookies rolled in a heavy dusting of sweet cinnamon and sugar. A classic favorite with a soft pillowy texture.</p>
+                    </div>
+                    <button onclick="addToCart('Snickerdoodle', 3.50)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Cookie Item 4 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="Peanut Butter" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $3.75 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Peanut Butter</h3>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“Rich, soft, and irresistible.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Thick, nutty, and loaded with authentic creamy peanut butter flavor featuring the classic criss-cross pattern.</p>
+                    </div>
+                    <button onclick="addToCart('Peanut Butter', 3.75)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Cookie Item 5 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?auto=format&fit=crop&w=600&q=80" alt="Salted Caramel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $4.00 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Salted Caramel</h3>
+                            <span class="text-xs bg-goldAccent/20 text-goldAccent px-2 py-0.5 rounded font-semibold">Chef's Pick</span>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“Sweet, salty, and unforgettable.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Rich caramel dripped over soft dough and sprinkled with sea salt crystals for the ultimate late-night balance.</p>
+                    </div>
+                    <button onclick="addToCart('Salted Caramel', 4.00)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+                <!-- Cookie Item 6 -->
+                <div class="group relative rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent/60 p-6 transition-all duration-300 hover:shadow-gold-glow flex flex-col justify-between">
+                    <div class="relative overflow-hidden rounded-xl h-48 mb-6">
+                        <img src="https://images.unsplash.com/photo-1548365328-8c6db4b63388?auto=format&fit=crop&w=600&q=80" alt="Chocolate Chip Pecan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-3 right-3 bg-midnight/90 border border-goldAccent text-goldAccent px-3 py-1 rounded-full text-xs font-bold">
+                            $4.00 / ea
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-white group-hover:text-goldAccent transition-colors">Chocolate Chip Pecan</h3>
+                        </div>
+                        <p class="font-script text-2xl text-goldAccent mb-3">“A crunchy twist on a classic.”</p>
+                        <p class="text-gray-400 text-sm mb-6">Our famous chocolate chip base elevated with buttery roasted pecans for an irresistible crunch and depth of flavor.</p>
+                    </div>
+                    <button onclick="addToCart('Chocolate Chip Pecan', 4.00)" class="w-full py-3 rounded-xl bg-midnight-light hover:bg-purpleAccent border border-purpleAccent/30 hover:border-purpleAccent text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Order
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Banner Callout inside Menu -->
+            <div class="mt-16 p-8 rounded-3xl bg-gradient-to-r from-purple-900/40 via-midnight-card to-purple-900/40 border border-purpleAccent/40 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-purple-glow">
+                <div class="text-left">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-1">Want a custom box or mix & match batch?</h3>
+                    <p class="text-gray-300 text-sm">Send us a direct message with your request and we will craft it right away!</p>
+                </div>
+                <a href="tel:7692899557" class="whitespace-nowrap px-6 py-3 rounded-full bg-goldAccent text-midnight font-bold hover:bg-goldHover transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-comment-dots"></i> Message Us Now
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Ready to Order & Contact Options -->
+    <section id="ordering" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Contact Cards -->
+                <div class="lg:col-span-7 space-y-8">
+                    
+                    <div>
+                        <span class="font-script text-4xl text-purpleAccent block">Ready to Order?</span>
+                        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white gold-gradient-text uppercase tracking-wide">
+                            CONTACT US TODAY!
+                        </h2>
+                        <p class="text-gray-300 mt-2">Every craving deserves a cookie. Here is how you can connect with us instantly:</p>
+                    </div>
+
+                    <!-- 4 Customer Facing CTAs from Flyer -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <!-- CTA 1 -->
+                        <div class="p-5 rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-purpleAccent/20 flex items-center justify-center text-purpleAccent text-xl mb-3 group-hover:bg-goldAccent group-hover:text-midnight transition-colors">
+                                <i class="fa-solid fa-cookie-bite"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-1">Order Cookie</h4>
+                            <p class="text-gray-400 text-xs mb-3">Your favorites are just a message away.</p>
+                            <a href="sms:7692899557" class="text-xs text-goldAccent font-semibold hover:underline flex items-center gap-1">
+                                Text to Order <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- CTA 2 -->
+                        <div class="p-5 rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-purpleAccent/20 flex items-center justify-center text-purpleAccent text-xl mb-3 group-hover:bg-goldAccent group-hover:text-midnight transition-colors">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-1">Contact Us</h4>
+                            <p class="text-gray-400 text-xs mb-3">We're happy to help with catering & questions!</p>
+                            <a href="mailto:midnightcrumbles@gmail.com" class="text-xs text-goldAccent font-semibold hover:underline flex items-center gap-1">
+                                Email Us <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- CTA 3 -->
+                        <div class="p-5 rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-purpleAccent/20 flex items-center justify-center text-purpleAccent text-xl mb-3 group-hover:bg-goldAccent group-hover:text-midnight transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-1">Join Mailing List</h4>
+                            <p class="text-gray-400 text-xs mb-3">Be the first to know about new flavors & deals!</p>
+                            <button onclick="openNewsletterModal()" class="text-xs text-goldAccent font-semibold hover:underline flex items-center gap-1">
+                                Subscribe <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+
+                        <!-- CTA 4 -->
+                        <div class="p-5 rounded-2xl bg-midnight-card border border-purpleAccent/20 hover:border-goldAccent transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-purpleAccent/20 flex items-center justify-center text-purpleAccent text-xl mb-3 group-hover:bg-goldAccent group-hover:text-midnight transition-colors">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-1">Follow Us</h4>
+                            <p class="text-gray-400 text-xs mb-3">For updates, specials, and behind the scenes!</p>
+                            <a href="https://instagram.com" target="_blank" class="text-xs text-goldAccent font-semibold hover:underline flex items-center gap-1">
+                                @MidnightCrumbles <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- Direct Contact Details Summary -->
+                    <div class="p-6 rounded-2xl bg-midnight-light/50 border border-purpleAccent/30 flex flex-wrap gap-6 items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-goldAccent/20 text-goldAccent flex items-center justify-center">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Phone / Text</div>
+                                <a href="tel:7692899557" class="text-white font-bold hover:text-goldAccent">769-289-9557</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-purpleAccent/20 text-purpleAccent flex items-center justify-center">
+                                <i class="fa-solid fa-at"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Email Address</div>
+                                <a href="mailto:midnightcrumbles@gmail.com" class="text-white font-bold hover:text-purpleAccent">midnightcrumbles@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Digital QR Scanner Card -->
+                <div class="lg:col-span-5">
+                    <div class="p-8 rounded-3xl bg-midnight-card border-2 border-purpleAccent/40 shadow-purple-glow text-center relative overflow-hidden">
+                        
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-purpleAccent/20 rounded-full blur-2xl"></div>
+
+                        <span class="font-script text-3xl text-goldAccent block mb-1">Easy Scanning</span>
+                        <h3 class="text-xl font-bold text-white uppercase tracking-wider mb-6">Menu, Prices & Payment Info</h3>
+
+                        <!-- Interactive QR Code Visual -->
+                        <div class="bg-white p-6 rounded-2xl inline-block shadow-2xl relative group my-2 border-4 border-goldAccent/80">
+                            <!-- SVG Generated Dynamic QR Code Representation -->
+                            <svg class="w-48 h-48 mx-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h100v100H0z" fill="#FFF"/>
+                                <!-- Top Left Position Marker -->
+                                <path d="M10 10h25v25H10z" fill="#09060D"/>
+                                <path d="M14 14h17v17H14z" fill="#FFF"/>
+                                <path d="M18 18h9v9h-9z" fill="#A600E8"/>
+                                <!-- Top Right Position Marker -->
+                                <path d="M65 10h25v25H65z" fill="#09060D"/>
+                                <path d="M69 14h17v17H69z" fill="#FFF"/>
+                                <path d="M73 18h9v9h-9z" fill="#A600E8"/>
+                                <!-- Bottom Left Position Marker -->
+                                <path d="M10 65h25v25H10z" fill="#09060D"/>
+                                <path d="M14 69h17v17H14z" fill="#FFF"/>
+                                <path d="M18 73h9v9h-9z" fill="#A600E8"/>
+                                <!-- QR Data Pattern Blocks -->
+                                <path d="M40 10h10v10H40zm15 0h5v5h-5zm0 10h10v10H55zm-15 15h10v10H40zm25 0h10v10H65zm15 15h10v10H80zm-70 5h10v5H10zm30 0h15v10H40zm20 0h10v10H60zm15 0h10v10H75zm-35 15h10v10H40zm20 0h15v5H60zm-50 10h10v10H10zm20 0h10v10H30zm30 0h10v10H60zm15 0h15v10H75z" fill="#09060D"/>
+                                <circle cx="50" cy="50" r="8" fill="#FFD15C"/>
+                            </svg>
+                            <div class="mt-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                                Scan for instant access
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 mt-6 leading-relaxed">
+                            Scan the QR code with your mobile camera to quickly load our complete digital menu, updated pricing, and direct payment options.
+                        </p>
+
+                        <div class="mt-6 pt-6 border-t border-purpleAccent/20 flex items-center justify-center gap-2 text-xs text-goldAccent font-semibold">
+                            <i class="fa-solid fa-shield-halved"></i> Fast, Safe & Direct Late Night Ordering
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-midnight-card/30 border-t border-purpleAccent/10 relative">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+            <span class="font-script text-3xl sm:text-4xl text-purpleAccent">The Midnight Story</span>
+            <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white">Every Craving Deserves a Cookie.</h2>
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                At Midnight Crumbles, we believe that the best cravings happen after hours. What started as a late-night passion for warm, rich, and decadent baking turned into a beloved local obsession. Every single batch is handcrafted with real, high-quality ingredients to deliver maximum flavor when you need it most.
+            </p>
+            <div class="pt-4 flex justify-center items-center gap-3">
+                <i class="fa-solid fa-star text-goldAccent text-xs"></i>
+                <i class="fa-solid fa-star text-goldAccent text-sm"></i>
+                <i class="fa-solid fa-star text-goldAccent text-base"></i>
+                <i class="fa-solid fa-star text-goldAccent text-sm"></i>
+                <i class="fa-solid fa-star text-goldAccent text-xs"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-midnight border-t border-purpleAccent/20 py-12 text-center text-sm text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex items-center justify-center gap-3">
+                <span class="font-serif text-xl font-bold gold-gradient-text">MIDNIGHT CRUMBLES</span>
+                <span class="text-purpleAccent">•</span>
+                <span class="font-script text-xl text-purpleAccent">Homemade Cookies</span>
+            </div>
+
+            <p class="italic text-goldAccent font-serif text-base">“Craving don't have a curfew!”</p>
+
+            <div class="flex justify-center space-x-6 text-xl text-gray-300">
+                <a href="https://instagram.com" target="_blank" class="hover:text-goldAccent transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="tel:7692899557" class="hover:text-goldAccent transition-colors" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+                <a href="mailto:midnightcrumbles@gmail.com" class="hover:text-goldAccent transition-colors" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+
+            <p class="text-xs text-gray-500">
+                &copy; <span id="year"></span> Midnight Crumbles. All rights reserved. Designed for late-night cookie lovers.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Cart / Order Drawer Modal -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
+            <div class="w-screen max-w-md bg-midnight-card border-l border-purpleAccent/30 text-white p-6 flex flex-col justify-between shadow-2xl">
+                
+                <div>
+                    <!-- Drawer Header -->
+                    <div class="flex items-center justify-between pb-4 border-b border-purpleAccent/20">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-cookie-bite text-goldAccent text-xl"></i>
+                            <h3 class="font-serif font-bold text-xl text-white">Your Order</h3>
+                        </div>
+                        <button onclick="toggleCartDrawer()" class="p-2 text-gray-400 hover:text-white">
+                            <i class="fa-solid fa-xmark text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Items List -->
+                    <div id="cart-items" class="py-6 space-y-4 max-h-[55vh] overflow-y-auto">
+                        <p class="text-gray-400 text-center py-8 text-sm">Your order is empty. Pick a cookie from the menu!</p>
+                    </div>
+                </div>
+
+                <!-- Drawer Footer & Order Trigger -->
+                <div class="pt-4 border-t border-purpleAccent/20 space-y-4">
+                    <div class="flex justify-between items-center text-lg font-bold">
+                        <span>Total:</span>
+                        <span id="cart-total" class="text-goldAccent">$0.00</span>
+                    </div>
+
+                    <p class="text-xs text-gray-400">Order directly via text message or email with auto-populated details!</p>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="submitOrder('text')" class="py-3 rounded-xl bg-purpleAccent hover:bg-purple-600 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-comment-sms"></i> Text Order
+                        </button>
+                        <button onclick="submitOrder('email')" class="py-3 rounded-xl bg-midnight-light border border-goldAccent hover:bg-goldAccent hover:text-midnight font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i> Email Order
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4">
+        <div class="bg-midnight-card border border-goldAccent/40 p-8 rounded-3xl max-w-md w-full relative text-center space-y-4 shadow-gold-glow">
+            <button onclick="closeNewsletterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <i class="fa-solid fa-heart text-purpleAccent text-4xl mb-2"></i>
+            <h3 class="font-serif text-2xl font-bold text-white">Join the Midnight Club</h3>
+            <p class="text-gray-300 text-sm">Be the first to know about new flavors, secret menu drops, and late-night deals!</p>
+
+            <form onsubmit="handleNewsletterSubmit(event)" class="space-y-3 pt-2">
+                <input type="email" required placeholder="Enter your email address" class="w-full px-4 py-3 rounded-xl bg-midnight-light border border-purpleAccent/30 text-white text-sm focus:outline-none focus:border-goldAccent">
+                <button type="submit" class="w-full py-3 rounded-xl bg-goldAccent text-midnight font-bold text-sm hover:bg-goldHover transition-colors">
+                    Subscribe Now
+                </button>
+            </form>
+            <p id="newsletter-success" class="text-xs text-green-400 hidden">You're in! Welcome to the Midnight Crumbles family.</p>
+        </div>
+    </div>
+
+    <script>
+        // Dynamic Current Year in Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Cart State
+        let cart = [];
+
+        // Add to Cart Logic
+        function addToCart(name, price) {
+            const existingIndex = cart.findIndex(item => item.name === name);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        // Remove / Decrease Item
+        function updateQuantity(name, delta) {
+            const index = cart.findIndex(item => item.name === name);
+            if (index > -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Render Cart UI
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCountBadge = document.getElementById('cart-count');
+            const cartTotalEl = document.getElementById('cart-total');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cartCountBadge.textContent = totalCount;
+            cartTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8 text-sm">Your order is empty. Pick a cookie from the menu!</p>`;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-midnight-light/60 border border-purpleAccent/20">
+                    <div>
+                        <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                        <span class="text-xs text-goldAccent">$${item.price.toFixed(2)} each</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateQuantity('${item.name}', -1)" class="w-7 h-7 rounded-lg bg-midnight border border-purpleAccent/30 text-white flex items-center justify-center hover:bg-purpleAccent transition-colors">-</button>
+                        <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.name}', 1)" class="w-7 h-7 rounded-lg bg-midnight border border-purpleAccent/30 text-white flex items-center justify-center hover:bg-purpleAccent transition-colors">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Drawer Toggle
+        function toggleCartDrawer(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            if (forceOpen || drawer.classList.contains('pointer-events-none')) {
+                drawer.classList.remove('pointer-events-none', 'opacity-0');
+            } else {
+                drawer.classList.add('pointer-events-none', 'opacity-0');
+            }
+        }
+
+        // Submit Order Logic via Text or Email
+        function submitOrder(method) {
+            if (cart.length === 0) {
+                alert('Please add at least one cookie to your order first!');
+                return;
+            }
+
+            const orderText = cart.map(item => `${item.quantity}x ${item.name}`).join(', ');
+            const total = document.getElementById('cart-total').textContent;
+            const message = encodeURIComponent(`Hi Midnight Crumbles! I'd like to order: ${orderText}. Total: ${total}.`);
+
+            if (method === 'text') {
+                window.location.href = `sms:7692899557?body=${message}`;
+            } else if (method === 'email') {
+                window.location.href = `mailto:midnightcrumbles@gmail.com?subject=New Cookie Order&body=${message}`;
+            }
+        }
+
+        // Newsletter Modal Logic
+        function openNewsletterModal() {
+            document.getElementById('newsletter-modal').classList.remove('hidden');
+            document.getElementById('newsletter-modal').classList.add('flex');
+        }
+
+        function closeNewsletterModal() {
+            document.getElementById('newsletter-modal').classList.add('hidden');
+            document.getElementById('newsletter-modal').classList.remove('flex');
+            document.getElementById('newsletter-success').classList.add('hidden');
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            document.getElementById('newsletter-success').classList.remove('hidden');
+            setTimeout(() => {
+                closeNewsletterModal();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
